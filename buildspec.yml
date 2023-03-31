@@ -18,6 +18,6 @@ phases:
           docker run \
             --env CYPRESS_ID_HOST="$ID_HOST" \
             --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
-            --env CYPRESS_PUBLISH_USER
-            --env CYPRESS_PUBLISH_PASS
+            --env CYPRESS_PUBLISH_USER \
+            --env CYPRESS_PUBLISH_PASS \
             tests
