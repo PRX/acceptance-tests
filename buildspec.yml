@@ -1,5 +1,23 @@
 version: 0.2
+env:
+  parameter-store:
+    DOCKERHUB_USERNAME: /prx/DOCKERHUB_USERNAME
+    DOCKERHUB_PASSWORD: /prx/DOCKERHUB_PASSWORD
+    # Cypress
+    CYPRESS_PUBLISH_USER: /prx/test/meta.prx.org/PUBLISH_USER
+    CYPRESS_PUBLISH_PASS: /prx/test/meta.prx.org/PUBLISH_PASS
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
   build:
     commands:
-      - echo 1
+      - docker build --tag tests .
+      - |
+          docker run \
+            --env CYPRESS_ID_HOST="$ID_HOST" \
+            --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
+            --env CYPRESS_PUBLISH_USER
+            --env CYPRESS_PUBLISH_PASS
+            tests
