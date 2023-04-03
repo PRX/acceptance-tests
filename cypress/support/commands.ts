@@ -27,6 +27,19 @@ function waitForRssItems(url, title, retries = 0) {
           expect(enclosureLength).to.equal("40557");
           return;
         }
+
+        cy.request({
+          url: enclosureUrl,
+          encoding: "binary",
+        }).then((response) => {
+          cy.writeFile("test.mp3", response.body, "binary");
+          cy.readFile("test.mp3", "base64").then((mp3) => {
+            expect(mp3.length).to.equal(54076);
+            return;
+          });
+        });
+
+        return;
       }
     }
 
