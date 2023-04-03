@@ -13,7 +13,7 @@ function waitForRssItems(url, title, retries = 0) {
       const items = doc.querySelectorAll("item");
 
       if (items.length) {
-        const episode = [...items][0];
+        const episode = Array.from(items)[0];
         const episodeTitle = episode
           .getElementsByTagName("title")[0]
           .textContent.trim();
@@ -25,7 +25,6 @@ function waitForRssItems(url, title, retries = 0) {
         if (title === episodeTitle) {
           expect(title).to.equal(episodeTitle);
           expect(enclosureLength).to.equal("40557");
-          return;
         }
 
         cy.request({
