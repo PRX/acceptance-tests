@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "prettier --check '**/*.{ts,js,json,yml}' && eslint '**/*.{js,ts}' && tsc",
     "start": "cypress open",
     "test": "cypress run"
   },
