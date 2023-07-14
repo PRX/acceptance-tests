@@ -17,18 +17,18 @@ phases:
     commands:
       - docker build --tag tests .
       - |
-          docker run \
-            --env CYPRESS_AUGURY_HOST="$AUGURY_HOST" \
-            --env CYPRESS_DOVETAIL_HOST="$DOVETAIL_HOST" \
-            --env CYPRESS_FEEDER_HOST="$FEEDER_HOST" \
-            --env CYPRESS_ID_HOST="$ID_HOST" \
-            --env CYPRESS_METRICS_HOST="$METRICS_HOST" \
-            --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
-            --env CYPRESS_UPLOAD_HOST="$UPLOAD_HOST" \
-            --env CYPRESS_PORTER_STATE_MACHINE_ARN="$PORTER_STATE_MACHINE_ARN" \
-            --env CYPRESS_PORTER_TEST_BUCKET_NAME="$PORTER_TEST_BUCKET_NAME" \
-            --env CYPRESS_TEST_PRX_USER \
-            --env CYPRESS_TEST_PRX_PASS \
-            --env CYPRESS_TEST_FEEDER_PODCAST \
-            --env CYPRESS_TEST_FEEDER_EPISODE \
-            tests
+        docker run \
+          --env CYPRESS_AUGURY_HOST="$AUGURY_HOST" \
+          --env CYPRESS_DOVETAIL_HOST="$DOVETAIL_HOST" \
+          --env CYPRESS_FEEDER_HOST="$FEEDER_HOST" \
+          --env CYPRESS_ID_HOST="$ID_HOST" \
+          --env CYPRESS_METRICS_HOST="$METRICS_HOST" \
+          --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
+          --env CYPRESS_UPLOAD_HOST="$UPLOAD_HOST" \
+          --env CYPRESS_PORTER_STATE_MACHINE_ARN="$PORTER_STATE_MACHINE_ARN" \
+          --env CYPRESS_PORTER_TEST_BUCKET_NAME="$PORTER_TEST_BUCKET_NAME" \
+          --env CYPRESS_TEST_PRX_USER \
+          --env CYPRESS_TEST_PRX_PASS \
+          --env CYPRESS_TEST_FEEDER_PODCAST \
+          --env CYPRESS_TEST_FEEDER_EPISODE \
+          tests
