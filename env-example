@@ -1,0 +1,18 @@
+# hosts
+CYPRESS_AUGURY_HOST=augury.staging.prx.tech
+CYPRESS_DOVETAIL_HOST=dovetail.staging.prxu.org
+CYPRESS_FEEDER_HOST=feeder.staging.prx.tech
+CYPRESS_ID_HOST=id.staging.prx.tech
+CYPRESS_METRICS_HOST=metrics.staging.prx.tech
+CYPRESS_PUBLISH_HOST=publish.staging.prx.test
+CYPRESS_UPLOAD_HOST=
+
+# porter
+CYPRESS_PORTER_STATE_MACHINE_ARN=
+CYPRESS_PORTER_TEST_BUCKET_NAME=
+
+# configuration
+CYPRESS_TEST_PRX_USER=
+CYPRESS_TEST_PRX_PASS=
+CYPRESS_TEST_FEEDER_PODCAST=
+CYPRESS_TEST_FEEDER_EPISODE=
