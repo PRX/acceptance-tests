@@ -52,13 +52,15 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
           });
         });
 
-        cy.request({ url: imageUrl, encoding: "binary" }).then((response) => {
-          cy.writeFile("test.jpg", response.body, "binary");
-          cy.readFile("test.jpg", "binary").then((img) => {
-            expect(img.length).to.equal(20261);
-            return;
+        if (checkImage) {
+          cy.request({ url: imageUrl, encoding: "binary" }).then((response) => {
+            cy.writeFile("test.jpg", response.body, "binary");
+            cy.readFile("test.jpg", "binary").then((img) => {
+              expect(img.length).to.equal(20261);
+              return;
+            });
           });
-        });
+        }
 
         return;
       }
