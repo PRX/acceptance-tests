@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "prettier --check '**/*.{ts,js,json,yml}' && eslint '**/*.{js,ts}' && tsc",
+    "start": "cypress open",
+    "test": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,8 @@
   "homepage": "https://github.com/PRX/acceptance-tests#readme",
   "devDependencies": {
     "cypress": "*",
-    "dotenv": "*",
+    "cypress-dotenv": "^2.0.0",
+    "dotenv": "^16.3.1",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-config-prettier": "*",

@@ -6,8 +6,8 @@ describe("Publish", () => {
     // Login
     cy.visit(`https://${Cypress.env("ID_HOST")}/`);
     cy.contains("Sign in");
-    cy.get("#login").type(Cypress.env("PUBLISH_USER"));
-    cy.get("#password").type(Cypress.env("PUBLISH_PASS"));
+    cy.get("#login").type(Cypress.env("TEST_PRX_USER"));
+    cy.get("#password").type(Cypress.env("TEST_PRX_PASS"));
     cy.get(".btn.submit").click();
 
     // Confirm login
