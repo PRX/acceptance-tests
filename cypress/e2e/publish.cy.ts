@@ -28,12 +28,8 @@ describe("Publish", () => {
       const seriesId = seriesUrl.split("/").at(-1);
 
       // Create a podcast for the series
-      cy.visit(
-        `https://${Cypress.env("PUBLISH_HOST")}/series/${seriesId}/podcast`
-      );
-      cy.get(
-        ".page form prx-fancy-field[label='Series Podcast'] button"
-      ).click();
+      cy.visit(`https://${Cypress.env("PUBLISH_HOST")}/series/${seriesId}/podcast`);
+      cy.get(".page form prx-fancy-field[label='Series Podcast'] button").click();
       cy.get("#category").click();
       cy.get("#category .ng-option").first().click();
       cy.get("#explicit").click();
@@ -46,16 +42,13 @@ describe("Publish", () => {
         const feedUrl = inp.val().toString();
 
         // Create a new episode
-        cy.visit(
-          `https://${Cypress.env("PUBLISH_HOST")}/story/new/${seriesId}`
-        );
+        cy.visit(`https://${Cypress.env("PUBLISH_HOST")}/story/new/${seriesId}`);
         cy.get("prx-modal footer button").contains("Okay").click();
         cy.get("#title").type(canary);
         cy.get("#shortDescription").type(canary);
-        cy.get("prx-audio-input input[type=file]").selectFile(
-          "cypress/samples/two-tone.mp3",
-          { force: true }
-        );
+        cy.get("prx-audio-input input[type=file]").selectFile("cypress/samples/two-tone.mp3", {
+          force: true,
+        });
         cy.get("publish-story-status select").first().select("published");
         cy.get("button").contains("Publish Now").click();
 
@@ -63,7 +56,7 @@ describe("Publish", () => {
         cy.get("label[for=editDate]", { timeout: 60000 }).should("exist");
 
         // Confirm that the episode has been added to the public feed
-        cy.waitForRssItems(feedUrl, canary);
+        cy.waitForRssItems(feedUrl, canary, false);
 
         // Unpublish the episode
         cy.get("publish-status-control .dropdown-toggle").click();
@@ -71,9 +64,7 @@ describe("Publish", () => {
         cy.get("prx-modal footer button").contains("Okay").click();
 
         // Once the episode has been unpublished
-        cy.get("publish-story-status h2.draft")
-          .contains("draft")
-          .should("exist");
+        cy.get("publish-story-status h2.draft").contains("draft").should("exist");
 
         // Delete the episode
         cy.get("publish-status-control .dropdown-toggle").click();

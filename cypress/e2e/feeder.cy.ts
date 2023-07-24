@@ -41,7 +41,7 @@ describe("Feeder", () => {
     cy.contains("Episode created");
 
     // wait for file processing, then publish
-    cy.get("#episode-media .spinner-border", { timeout: 30000 }).should("not.exist");
+    cy.get("#episode-media .spinner-border", { timeout: 60000 }).should("not.exist");
     cy.get("#episode-form-image .spinner-border", { timeout: 5000 }).should("not.exist");
     cy.get("#episode_publishing_status").select("Published", { force: true });
     cy.contains(".btn", "Save").click();
@@ -52,9 +52,6 @@ describe("Feeder", () => {
     cy.contains("a", "Feeds").click({ force: true });
     cy.get("#feed_feed_link").then(($input) => {
       const feedUrl = $input.val().toString();
-
-      // if we wait, maybe we can get a cache-miss up front
-      cy.wait(10000);
       cy.waitForRssItems(feedUrl, canary, true);
     });
 

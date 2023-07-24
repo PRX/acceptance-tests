@@ -19,7 +19,9 @@ Cypress.Commands.add("login", (username, password) => {
 
 // Keeps requesting a URL until it contains and XML <item>
 function waitForRssItems(url, title, checkImage = false, retries = 0) {
-  cy.request({ url: url, failOnStatusCode: false }).then((resp) => {
+  const now = new Date().getTime();
+
+  cy.request({ url: `${url}?cb=${now}`, failOnStatusCode: false }).then((resp) => {
     if (resp.status === 200) {
       const parser = new DOMParser();
 
@@ -37,7 +39,7 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
         const enclosureLength = enclosure.getAttribute("length");
 
         const image = episode.getElementsByTagName("itunes:image")[0];
-        const imageUrl = image.getAttribute("href");
+        const imageUrl = image ? image.getAttribute("href") : null;
 
         if (title === episodeTitle) {
           expect(title).to.equal(episodeTitle);
@@ -68,7 +70,7 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
 
     cy.log("Still waiting for episode to hit RSS feed…");
     cy.wait(Math.min(10000, 2 ** retries * 1000));
-    waitForRssItems(url, title, (retries += 1));
+    waitForRssItems(url, title, checkImage, (retries += 1));
   });
 }
 
