@@ -131,3 +131,6 @@ cypress/screenshots/
 cypress/videos/
 /test.jpg
 /test.mp3
+
+# those pesky mac os files...
+.DS_Store
