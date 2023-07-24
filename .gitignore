@@ -127,4 +127,7 @@ dist
 .pnp.*
 
 # Cypress
+cypress/screenshots/
 cypress/videos/
+/test.jpg
+/test.mp3
