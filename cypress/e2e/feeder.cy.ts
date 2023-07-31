@@ -50,7 +50,7 @@ describe("Feeder", () => {
     // find the feed url, and wait for item to appear
     // NOTE: header link may be covered by the toast
     cy.contains("a", "Feeds").click({ force: true });
-    cy.get("#feed_feed_link").then(($input) => {
+    cy.get("#feed_published_url").then(($input) => {
       const feedUrl = $input.val().toString();
       cy.waitForRssItems(feedUrl, canary, true);
     });
