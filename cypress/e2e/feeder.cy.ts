@@ -32,16 +32,22 @@ describe("Feeder", () => {
       }
     });
 
-    // add image/audio and create episode
+    // add image and create episode
     cy.get("#episode_title").type(canary);
-    cy.get("#episode_ad_breaks").type(0);
-    cy.get("#episode-media input[type=file]").selectFile(audioFile, { force: true });
     cy.get("#episode-form-image input[type=file]").selectFile(imageFile, { force: true });
     cy.contains(".btn", "Create Draft").click();
     cy.contains("Episode created");
 
+    // add audio and save
+    cy.contains("a", "Media Files").click();
+    cy.get("#episode_ad_breaks").type(0);
+    cy.get("#episode-form-media input[type=file]").selectFile(audioFile, { force: true });
+    cy.contains(".btn", "Save").click();
+    cy.contains("Media files updated");
+
     // wait for file processing, then publish
-    cy.get("#episode-media .spinner-border", { timeout: 60000 }).should("not.exist");
+    cy.get("#episode-form-media .spinner-border", { timeout: 60000 }).should("not.exist");
+    cy.get(".prx-tabs-nav a").first().click();
     cy.get("#episode-form-image .spinner-border", { timeout: 5000 }).should("not.exist");
     cy.get("#episode_publishing_status").select("Published", { force: true });
     cy.contains(".btn", "Save").click();
