@@ -14,8 +14,7 @@ describe("Feeder", () => {
     cy.contains("My Podcasts");
 
     // create a new podcast
-    cy.get("#podcast-switcher").click();
-    cy.get('a[href="/podcasts/new"]').click();
+    cy.get('a.btn-success[href="/podcasts/new"]').click();
     cy.contains("New Podcast");
     cy.get("#podcast_title").type(canary);
     cy.get("#podcast_itunes_category").select("Business", { force: true });
