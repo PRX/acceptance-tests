@@ -17,8 +17,10 @@ describe("Feeder", () => {
     cy.get('a.btn-success[href="/podcasts/new"]').click();
     cy.contains("New Podcast");
     cy.get("#podcast_title").type(canary);
-    cy.get("#podcast_itunes_category").select("Business", { force: true });
-    cy.get("#podcast_itunes_subcategory").select("Careers", { force: true });
+    cy.get("#podcast_default_feed_attributes_itunes_category").select("Business", { force: true });
+    cy.get("#podcast_default_feed_attributes_itunes_subcategory").select("Careers", {
+      force: true,
+    });
     cy.contains(".btn", "Create").click();
     cy.contains("Podcast created");
 
