@@ -23,6 +23,7 @@ phases:
           --env CYPRESS_FEEDER_HOST="$FEEDER_HOST" \
           --env CYPRESS_ID_HOST="$ID_HOST" \
           --env CYPRESS_METRICS_HOST="$METRICS_HOST" \
+          --env CYPRESS_AUGURY_HOST="$AUGURY_HOST" \
           --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
           --env CYPRESS_UPLOAD_HOST="$UPLOAD_HOST" \
           --env CYPRESS_PORTER_STATE_MACHINE_ARN="$PORTER_STATE_MACHINE_ARN" \
