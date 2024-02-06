@@ -1,5 +1,4 @@
-/// <reference types="cypress" />
-// ***********************************************
+// Define interfaces for these commands in cypress.d.ts
 
 // Login via ID and cache the session cookie
 Cypress.Commands.add("login", (username, password) => {
@@ -75,17 +74,3 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
 }
 
 Cypress.Commands.add("waitForRssItems", waitForRssItems);
-
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      login(username: string, password: string): Chainable<void>;
-      waitForRssItems(
-        url: string,
-        title: string,
-        checkImage: boolean,
-        retries: number
-      ): Chainable<void>;
-    }
-  }
-}
