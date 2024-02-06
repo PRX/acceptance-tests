@@ -4,14 +4,4 @@ on: push
 
 jobs:
   check-javascript:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: yarn
-      - run: yarn install
-      - run: npm exec prettier -- --check "**/*.{ts,js,json,yml}"
-      - run: npm exec eslint -- "**/*.{js,ts}"
-      - run: npm exec tsc
+    uses: prx/.github/.github/workflows/check-project-std-javascript.yml@main

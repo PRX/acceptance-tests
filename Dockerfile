@@ -1,4 +1,4 @@
-FROM cypress/included:cypress-13.2.0-node-20.6.1-chrome-116.0.5845.187-1-ff-117.0-edge-116.0.1938.76-1
+FROM cypress/included:cypress-13.6.1-node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
 
 WORKDIR /app
 
