@@ -41,7 +41,7 @@ describe("Feeder", () => {
 
     // add audio and save
     cy.contains("a", "Media Files").click();
-    cy.get("#episode_ad_breaks").type(0);
+    cy.get("#episode_ad_breaks").type("0");
     cy.get("#episode-form-media input[type=file]").selectFile(audioFile, { force: true });
     cy.contains(".btn", "Save").click();
     cy.contains("Media files updated");
