@@ -1,7 +1,7 @@
 describe("Feeder", () => {
   before(() => {
     cy.login(Cypress.env("TEST_PRX_USER"), Cypress.env("TEST_PRX_PASS"));
-    cy.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
+    Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
   it("creates an episode and publishes it to a feed", () => {
