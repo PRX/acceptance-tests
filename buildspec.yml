@@ -1,3 +1,7 @@
+# This buildspec is run as a CI build on the acceptance-tests project itself.
+# Note that currently this build does NOT need to succeed before the code is
+# used as the acceptance tests of the Spire CD pipeline; it will always use the
+# current commit of `main`.
 version: 0.2
 env:
   parameter-store:
@@ -6,8 +10,6 @@ env:
     # Cypress
     CYPRESS_TEST_PRX_USER: /prx/test/meta.prx.org/TEST_PRX_USER
     CYPRESS_TEST_PRX_PASS: /prx/test/meta.prx.org/TEST_PRX_PASS
-    CYPRESS_TEST_FEEDER_PODCAST: /prx/test/meta.prx.org/TEST_FEEDER_PODCAST
-    CYPRESS_TEST_FEEDER_EPISODE: /prx/test/meta.prx.org/TEST_FEEDER_EPISODE
 phases:
   pre_build:
     commands:
@@ -18,18 +20,10 @@ phases:
       - docker build --tag tests .
       - |
         docker run \
-          --env CYPRESS_AUGURY_HOST="$AUGURY_HOST" \
-          --env CYPRESS_DOVETAIL_HOST="$DOVETAIL_HOST" \
-          --env CYPRESS_FEEDER_HOST="$FEEDER_HOST" \
-          --env CYPRESS_ID_HOST="$ID_HOST" \
-          --env CYPRESS_METRICS_HOST="$METRICS_HOST" \
-          --env CYPRESS_AUGURY_HOST="$AUGURY_HOST" \
-          --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
-          --env CYPRESS_UPLOAD_HOST="$UPLOAD_HOST" \
-          --env CYPRESS_PORTER_STATE_MACHINE_ARN="$PORTER_STATE_MACHINE_ARN" \
-          --env CYPRESS_PORTER_TEST_BUCKET_NAME="$PORTER_TEST_BUCKET_NAME" \
+          --env CYPRESS_ID_HOST="id.staging.prx.tech" \
+          --env CYPRESS_PUBLISH_HOST="publish.staging.prx.tech" \
+          --env CYPRESS_FEEDER_HOST="podcasts.staging.prx.tech" \
+          --env CYPRESS_AUGURY_HOST="inventory.staging.prx.tech" \
           --env CYPRESS_TEST_PRX_USER \
           --env CYPRESS_TEST_PRX_PASS \
-          --env CYPRESS_TEST_FEEDER_PODCAST \
-          --env CYPRESS_TEST_FEEDER_EPISODE \
           tests

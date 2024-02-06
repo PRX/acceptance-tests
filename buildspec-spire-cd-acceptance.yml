@@ -1,0 +1,37 @@
+# This buildspec is run as the acceptance tests of a Spire CD pipeline
+# execution. Many of the environment variables are passed in dynamically from
+# CodePipeline (which it gets from outputs of the staging CloudFormation stack)
+version: 0.2
+env:
+  parameter-store:
+    DOCKERHUB_USERNAME: /prx/DOCKERHUB_USERNAME
+    DOCKERHUB_PASSWORD: /prx/DOCKERHUB_PASSWORD
+    # Cypress
+    CYPRESS_TEST_PRX_USER: /prx/test/meta.prx.org/TEST_PRX_USER
+    CYPRESS_TEST_PRX_PASS: /prx/test/meta.prx.org/TEST_PRX_PASS
+    CYPRESS_TEST_FEEDER_PODCAST: /prx/test/meta.prx.org/TEST_FEEDER_PODCAST
+    CYPRESS_TEST_FEEDER_EPISODE: /prx/test/meta.prx.org/TEST_FEEDER_EPISODE
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+  build:
+    commands:
+      - docker build --tag tests .
+      - |
+        docker run \
+          --env CYPRESS_DOVETAIL_HOST="$DOVETAIL_HOST" \
+          --env CYPRESS_FEEDER_HOST="$FEEDER_HOST" \
+          --env CYPRESS_ID_HOST="$ID_HOST" \
+          --env CYPRESS_METRICS_HOST="$METRICS_HOST" \
+          --env CYPRESS_AUGURY_HOST="$AUGURY_HOST" \
+          --env CYPRESS_PUBLISH_HOST="$PUBLISH_HOST" \
+          --env CYPRESS_UPLOAD_HOST="$UPLOAD_HOST" \
+          --env CYPRESS_PORTER_STATE_MACHINE_ARN="$PORTER_STATE_MACHINE_ARN" \
+          --env CYPRESS_PORTER_TEST_BUCKET_NAME="$PORTER_TEST_BUCKET_NAME" \
+          --env CYPRESS_TEST_PRX_USER \
+          --env CYPRESS_TEST_PRX_PASS \
+          --env CYPRESS_TEST_FEEDER_PODCAST \
+          --env CYPRESS_TEST_FEEDER_EPISODE \
+          tests
