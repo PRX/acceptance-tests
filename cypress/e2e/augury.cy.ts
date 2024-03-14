@@ -23,7 +23,7 @@ describe("Augury", () => {
     cy.get("h2").contains(`Campaign ${canary}`);
 
     // add a flight
-    cy.contains(".btn", "Add a Flight").click();
+    cy.contains(".btn", "Add Flight").click();
     cy.get("#flight_name").type(`Flight ${canary}`);
     cy.get("#flight_start_at").type(now);
     cy.get("#flight_start_at").blur();
