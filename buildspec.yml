@@ -21,7 +21,6 @@ phases:
       - |
         docker run \
           --env CYPRESS_ID_HOST="id.staging.prx.tech" \
-          --env CYPRESS_PUBLISH_HOST="publish.staging.prx.tech" \
           --env CYPRESS_FEEDER_HOST="podcasts.dovetail.staging.prx.tech" \
           --env CYPRESS_AUGURY_HOST="inventory.dovetail.staging.prx.tech" \
           --env CYPRESS_TEST_PRX_USER \

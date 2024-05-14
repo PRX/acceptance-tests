@@ -4,7 +4,6 @@ CYPRESS_DOVETAIL_HOST=dovetail.staging.prxu.org
 CYPRESS_FEEDER_HOST=podcasts.dovetail.staging.prx.tech
 CYPRESS_ID_HOST=id.staging.prx.tech
 CYPRESS_METRICS_HOST=metrics.dovetail.staging.prx.tech
-CYPRESS_PUBLISH_HOST=publish.staging.prx.tech
 CYPRESS_UPLOAD_HOST=
 
 # porter
