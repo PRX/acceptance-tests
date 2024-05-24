@@ -1,9 +1,19 @@
 describe("Augury", () => {
-  before(() => {
+  beforeEach(() => {
     cy.login(Cypress.env("TEST_PRX_USER"), Cypress.env("TEST_PRX_PASS"));
-    Cypress.config({
-      baseUrl: `https://${Cypress.env("AUGURY_HOST")}`,
-    });
+    Cypress.config({ baseUrl: `https://${Cypress.env("AUGURY_HOST")}` });
+  });
+
+  it("find and update a series", () => {
+    const now = new Date().toISOString();
+    const canary = `Acceptance Test: ${now}`;
+
+    cy.visit("/inventory");
+    cy.contains("Series");
+    cy.contains("Acceptance Test Series").click();
+    cy.get("#inventory_notes").clear().type(`Inventory Notes: ${canary}`);
+    cy.contains(".btn", "Update Series").click().wait(100);
+    cy.contains("Series successfully updated");
   });
 
   it("creates and deletes campaigns and flights", () => {
@@ -43,6 +53,4 @@ describe("Augury", () => {
   it("creates flights and calculates inventory?", () => {
     // TODO
   });
-
-  // TODO Also test creating advertisers? creatives? reports? availability?
 });
