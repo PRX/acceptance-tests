@@ -1,5 +1,5 @@
 describe("Feeder", () => {
-  before(() => {
+  beforeEach(() => {
     cy.login(Cypress.env("TEST_PRX_USER"), Cypress.env("TEST_PRX_PASS"));
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
