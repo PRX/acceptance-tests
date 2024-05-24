@@ -6,6 +6,11 @@ declare namespace Cypress {
   }
 
   interface Chainable<Subject = any> {
-    waitForRssItems(url: string, title: string, checkImage: boolean, retries?: number): Chainable<any>;
+    waitForRssItems(
+      url: string,
+      title: string,
+      checkImage: boolean,
+      retries?: number,
+    ): Chainable<any>;
   }
 }
