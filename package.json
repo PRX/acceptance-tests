@@ -8,7 +8,7 @@
     "node": ">= 20.0.0"
   },
   "scripts": {
-    "lint": "prettier --check '**/*.{ts,js,json,yml}' && eslint '**/*.{js,ts}' && tsc",
+    "lint": "prettier --check '**/*.{ts,js,json,yml}' && eslint --ext .js && tsc",
     "start": "cypress open",
     "test": "cypress run"
   },
