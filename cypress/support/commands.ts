@@ -3,16 +3,13 @@
 // Login via ID and cache the session cookie
 Cypress.Commands.add("login", (username, password) => {
   const args = { username, password };
-
   cy.session(args, () => {
-    cy.origin(Cypress.env("ID_HOST"), { args }, ({ username, password }) => {
-      cy.visit(`https://${Cypress.env("ID_HOST")}/`);
-      cy.contains("Sign in");
-      cy.get("#login").type(username);
-      cy.get("#password").type(password);
-      cy.get(".btn.submit").click();
-      cy.contains("Welcome");
-    });
+    cy.visit(`https://${Cypress.env("ID_HOST")}/`);
+    cy.contains("Sign in");
+    cy.get("#login").type(username);
+    cy.get("#password").type(password);
+    cy.get(".btn.submit").click();
+    cy.contains("Welcome");
   });
 });
 
