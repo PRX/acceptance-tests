@@ -12,7 +12,7 @@ describe("Augury", () => {
     cy.contains("Series");
     cy.contains("Acceptance Test Series").click();
     cy.get("#inventory_notes").clear().type(`Inventory Notes: ${canary}`);
-    cy.contains(".btn", "Update Series").click().wait(100);
+    cy.contains(".btn", "Update Series").click().wait(200);
     cy.contains("Series successfully updated");
   });
 
