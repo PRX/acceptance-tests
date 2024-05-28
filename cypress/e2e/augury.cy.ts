@@ -11,8 +11,9 @@ describe("Augury", () => {
     cy.visit("/inventory");
     cy.contains("Series");
     cy.contains("Acceptance Test Series").click();
-    cy.get("#inventory_notes").clear().type(`Inventory Notes: ${canary}`);
-    cy.contains(".btn", "Update Series").click().wait(200);
+    cy.get("#inventory_notes").clear();
+    cy.get("#inventory_notes").type(`Inventory Notes: ${canary}`);
+    cy.contains(".btn", "Update Series").click();
     cy.contains("Series successfully updated");
   });
 
@@ -27,8 +28,11 @@ describe("Augury", () => {
     cy.get('a.btn-success[href="/campaigns/new"]').click();
     cy.contains("New Campaign");
     cy.get("#campaign_name").type(`Campaign ${canary}`);
-    cy.get("label[for=campaign_advertiser_id").prev().click().wait(500);
-    cy.get("input:focus").type("a").wait(500).type("{downArrow}{downArrow}{downArrow}{enter}");
+    cy.get("label[for=campaign_advertiser_id").prev().click();
+    cy.intercept("/options/advertisers?q=a").as("advertiserList");
+    cy.get("input:focus").type("a");
+    cy.wait("@advertiserList");
+    cy.get("input:focus").type("{downArrow}{downArrow}{downArrow}{enter}");
     cy.contains(".btn", "Create Campaign").click();
     cy.get("h2").contains(`Campaign ${canary}`);
 
@@ -37,8 +41,8 @@ describe("Augury", () => {
     cy.get("#flight_name").type(`Flight ${canary}`);
     cy.get("#flight_start_at").type(now);
     cy.get("#flight_start_at").blur();
-    cy.get("label[for=flight_inventory_id").prev().click().wait(500);
-    cy.get("div:focus").click().wait(500).type("{downArrow}{downArrow}{enter}");
+    cy.get("label[for=flight_inventory_id").prev().click();
+    cy.get("div:focus").type("{downArrow}{downArrow}{enter}");
     cy.contains(".btn", "Create Flight").click();
     cy.get("h2").contains(`Flight ${canary}`);
 
