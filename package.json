@@ -8,7 +8,7 @@
     "node": ">= 20.0.0"
   },
   "scripts": {
-    "lint": "prettier --check '**/*.{ts,js,json,yml}' && eslint '**/*.{js,ts}' && tsc",
+    "lint": "prettier --check '**/*.{json,yml}' && eslint -- '**/*.{js,mjs,ts}' && tsc",
     "start": "cypress open",
     "test": "cypress run"
   },
@@ -22,15 +22,19 @@
     "url": "https://github.com/PRX/acceptance-tests/issues"
   },
   "homepage": "https://github.com/PRX/acceptance-tests#readme",
-  "devDependencies": {
+  "dependencies": {
     "cypress": "*",
-    "cypress-dotenv": "^2.0.0",
+    "cypress-dotenv": "^2.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "*",
+    "@typescript-eslint/eslint-plugin": "*",
     "dotenv": "^16.3.1",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-config-prettier": "*",
     "eslint-plugin-import": "*",
-    "eslint-plugin-jest": "*",
+    "eslint-plugin-cypress": "*",
     "eslint-plugin-prettier": "*",
     "prettier": "*",
     "typescript": "*"
