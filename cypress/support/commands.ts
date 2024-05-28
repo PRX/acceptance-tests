@@ -46,7 +46,6 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
           cy.writeFile("test.mp3", response.body, "binary");
           cy.readFile("test.mp3", "base64").then((mp3) => {
             expect(mp3.length).to.equal(54076);
-            return;
           });
         });
 
@@ -55,7 +54,6 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
             cy.writeFile("test.jpg", response.body, "binary");
             cy.readFile("test.jpg", "binary").then((img) => {
               expect(img.length).to.equal(20261);
-              return;
             });
           });
         }
@@ -66,7 +64,7 @@ function waitForRssItems(url, title, checkImage = false, retries = 0) {
 
     cy.log("Still waiting for episode to hit RSS feed…");
     cy.wait(Math.min(10000, 2 ** retries * 1000));
-    waitForRssItems(url, title, checkImage, (retries += 1));
+    waitForRssItems(url, title, checkImage, retries + 1);
   });
 }
 
