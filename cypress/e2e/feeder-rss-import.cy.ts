@@ -1,5 +1,5 @@
 describe("Feeder RSS Import", () => {
-  before(() => {
+  beforeEach(() => {
     cy.login(Cypress.env("TEST_PRX_USER"), Cypress.env("TEST_PRX_PASS"));
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
@@ -21,7 +21,9 @@ describe("Feeder RSS Import", () => {
 
     // start importing a url
     cy.contains("a", "Import").click();
-    cy.get("#podcast_import_url").type("https://ryan-cdn.prxu.org/test-rss-import.xml");
+    cy.get("#podcast_import_url").type(
+      "https://prx-tech.s3.amazonaws.com/test/feed/test-rss-import.xml",
+    );
     cy.contains(".btn", "Start Import").click();
 
     // wait for the import to create episodes
