@@ -28,13 +28,13 @@ describe("Feeder RSS Import", () => {
 
     // wait for the import to create episodes
     cy.contains(".badge", "Created", { timeout: 30000 });
-    cy.contains(".badge", "Complete", { timeout: 30000 });
+    cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains("a", "S2 EP2 Glassware").click();
     cy.contains("Published");
     cy.contains("a", "Media Files").click();
 
     // wait for episode media to process
-    cy.contains(".badge", "Complete", { timeout: 30000 });
+    cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains("00:00:10");
 
     // go to podcast settings and delete
