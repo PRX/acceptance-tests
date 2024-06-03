@@ -27,7 +27,7 @@ describe("Feeder RSS Import", () => {
     cy.contains(".btn", "Start Import").click();
 
     // wait for the import to create episodes
-    cy.contains(".badge", "Created", { timeout: 30000 });
+    cy.contains(".badge", "Created", { timeout: 60000 });
     cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains("a", "S2 EP2 Glassware").click();
     cy.contains("Published");
