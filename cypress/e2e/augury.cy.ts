@@ -64,11 +64,10 @@ describe("Augury", () => {
     const audioFile = "cypress/samples/two-tone.mp3";
 
     cy.visit("/creatives");
-    cy.get("h1").contains("Creatives");
+    cy.contains("h1", "Creatives");
 
     // create creative
     cy.get("a.btn-success[href='/creatives/new']").click();
-    cy.contains("New Creative");
     cy.get("#creative_filename").type(`Creative ${canary}`);
     cy.get(".uploader-container").get("input[type=file]").selectFile(audioFile, { force: true });
     cy.get("#creative_account_id").next().type("{downArrow}{downArrow}{enter}");
@@ -82,9 +81,9 @@ describe("Augury", () => {
     // delete creative
     cy.visit("/creatives");
     cy.contains(`Creative ${canary}`).click();
-    cy.get("#list-settings-list").next().children().first().click();
+    cy.get("[id^=creative\-context-]").click();
     cy.contains("Delete Creative").click();
-    cy.get("button.btn-danger").contains("Delete Creative").click();
+    cy.contains("button.btn-danger", "Delete Creative").click();
     cy.contains("Creative deleted");
   });
 });
