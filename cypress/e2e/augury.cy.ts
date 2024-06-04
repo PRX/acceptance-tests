@@ -81,7 +81,7 @@ describe("Augury", () => {
     // delete creative
     cy.visit("/creatives");
     cy.contains(`Creative ${canary}`).click();
-    cy.get("[id^=creative\-context-]").click();
+    cy.get("[id^=creative-context-]").click();
     cy.contains("Delete Creative").click();
     cy.contains("button.btn-danger", "Delete Creative").click();
     cy.contains("Creative deleted");
