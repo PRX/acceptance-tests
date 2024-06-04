@@ -58,7 +58,7 @@ describe("Augury", () => {
     // TODO
   });
 
-  it("finds, creates, and deletes creatives", () => {
+  it("creates and deletes creatives", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
     const audioFile = "cypress/samples/two-tone.mp3";
@@ -77,6 +77,14 @@ describe("Augury", () => {
     cy.wait("@advertiserList");
     cy.get("input:focus").type("{downArrow}{enter}");
     cy.contains("Create Creative").click();
-    cy.contains("Creative was successfully created");
+    cy.contains("Creative was successfully created").wait(1000);
+
+    // delete creative
+    cy.visit("/creatives");
+    cy.contains(`Creative ${canary}`).click();
+    cy.get("#list-settings-list").next().children().first().click();
+    cy.contains("Delete Creative").click();
+    cy.get("button.btn-danger").contains("Delete Creative").click();
+    cy.contains("Creative deleted");
   });
 });
