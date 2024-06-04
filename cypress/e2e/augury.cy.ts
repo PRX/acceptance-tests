@@ -77,7 +77,7 @@ describe("Augury", () => {
     cy.wait("@advertiserList");
     cy.get("input:focus").type("{downArrow}{enter}");
     cy.contains("Create Creative").click();
-    cy.contains("Creative was successfully created").wait(1000);
+    cy.contains("Creative was successfully created");
 
     // delete creative
     cy.visit("/creatives");
