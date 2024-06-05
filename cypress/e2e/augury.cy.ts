@@ -57,4 +57,33 @@ describe("Augury", () => {
   it("creates flights and calculates inventory?", () => {
     // TODO
   });
+
+  it("creates and deletes creatives", () => {
+    const now = new Date().toISOString();
+    const canary = `Acceptance Test: ${now}`;
+    const audioFile = "cypress/samples/two-tone.mp3";
+
+    cy.visit("/creatives");
+    cy.contains("h1", "Creatives");
+
+    // create creative
+    cy.get("a.btn-success[href='/creatives/new']").click();
+    cy.get("#creative_filename").type(`Creative ${canary}`);
+    cy.get(".uploader-container").get("input[type=file]").selectFile(audioFile, { force: true });
+    cy.get("#creative_account_id").next().type("{downArrow}{downArrow}{enter}");
+    cy.intercept("/options/advertisers?q= ").as("advertiserList");
+    cy.get("#creative_advertiser_id").next().type(" ");
+    cy.wait("@advertiserList");
+    cy.get("input:focus").type("{downArrow}{enter}");
+    cy.contains("Create Creative").click();
+    cy.contains("Creative was successfully created");
+
+    // delete creative
+    cy.visit("/creatives");
+    cy.contains(`Creative ${canary}`).click();
+    cy.get("[id^=creative-context-]").click();
+    cy.contains("Delete Creative").click();
+    cy.contains("button.btn-danger", "Delete Creative").click();
+    cy.contains("Creative deleted");
+  });
 });
