@@ -62,10 +62,8 @@ describe("Augury", () => {
     // const now = new Date().toISOString();
     // const canary = `Acceptance Test: ${now}`;
     // const audioFile = "cypress/samples/two-tone.mp3";
-
     // cy.visit("/creatives");
     // cy.contains("h1", "Creatives");
-
     // create creative
     // cy.get("a.btn-success[href='/creatives/new']").click();
     // cy.get("#creative_filename").type(`Creative ${canary}`);
@@ -77,7 +75,6 @@ describe("Augury", () => {
     // cy.get("input:focus").type("{downArrow}{enter}");
     // cy.contains("Create Creative").click();
     // cy.contains("Creative was successfully created");
-
     // delete creative
     // cy.get("[id^=creative-context-]").click();
     // cy.contains("Delete Creative").click();
