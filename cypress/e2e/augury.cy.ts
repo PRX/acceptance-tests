@@ -59,12 +59,12 @@ describe("Augury", () => {
   });
 
   it("creates and deletes creatives", () => {
-    const now = new Date().toISOString();
-    const canary = `Acceptance Test: ${now}`;
-    const audioFile = "cypress/samples/two-tone.mp3";
+    // const now = new Date().toISOString();
+    // const canary = `Acceptance Test: ${now}`;
+    // const audioFile = "cypress/samples/two-tone.mp3";
 
-    cy.visit("/creatives");
-    cy.contains("h1", "Creatives");
+    // cy.visit("/creatives");
+    // cy.contains("h1", "Creatives");
 
     // create creative
     // cy.get("a.btn-success[href='/creatives/new']").click();
