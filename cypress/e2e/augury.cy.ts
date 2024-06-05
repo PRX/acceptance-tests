@@ -79,8 +79,6 @@ describe("Augury", () => {
     cy.contains("Creative was successfully created");
 
     // delete creative
-    cy.visit("/creatives");
-    cy.contains(`Creative ${canary}`).click();
     cy.get("[id^=creative-context-]").click();
     cy.contains("Delete Creative").click();
     cy.contains("button.btn-danger", "Delete Creative").click();
