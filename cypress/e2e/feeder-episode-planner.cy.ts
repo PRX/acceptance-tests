@@ -4,7 +4,7 @@ describe("Feeder Episode Planner", () => {
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
-  it ("builds episode drafts in bulk", () => {
+  it("builds episode drafts in bulk", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
 
@@ -20,8 +20,8 @@ describe("Feeder Episode Planner", () => {
 
     // plan episodes
     cy.contains("a", "Plan Episodes").click();
-    cy.get("#selected_days").select(["Sunday", "Monday"], {force: true});
-    cy.get("#selected_weeks").select("First Week", {force: true});
+    cy.get("#selected_days").select(["Sunday", "Monday"], { force: true });
+    cy.get("#selected_weeks").select("First Week", { force: true });
     cy.get("#ad_breaks").type("1");
     cy.contains("Create 10 Drafts").click();
     cy.contains("Episode drafts generated");
@@ -31,8 +31,8 @@ describe("Feeder Episode Planner", () => {
     cy.get(".prx-badge-incomplete").should("have.length", 10);
     cy.contains("a", "Plan Episodes").click();
     cy.get("td[class*='bg-warning']").should("have.length", 10);
-    cy.get("#selected_days").select("Sunday", {force: true});
-    cy.get("#selected_weeks").select("First Week", {force: true});
+    cy.get("#selected_days").select("Sunday", { force: true });
+    cy.get("#selected_weeks").select("First Week", { force: true });
     cy.get("td[class*='bg-danger']").should("have.length", 5);
 
     // go back to podcast settings and delete
@@ -44,4 +44,4 @@ describe("Feeder Episode Planner", () => {
     cy.contains(".btn", "Delete").click();
     cy.contains("Podcast deleted");
   });
-})
+});
