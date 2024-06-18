@@ -4,17 +4,6 @@ describe("Feeder RSS Import", () => {
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
-  after(() => {
-    // go to podcast settings and delete
-    cy.contains("a", "Settings").click({ force: true });
-    cy.get("#podcast_title");
-    cy.contains(".btn", "Save").next(".dropdown-toggle").click();
-    cy.contains(".dropdown-item", "Delete").click();
-    cy.contains("Really Delete?");
-    cy.contains(".btn", "Delete").click();
-    cy.contains("Podcast deleted");
-  });
-
   it("imports an RSS feed", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
@@ -76,5 +65,14 @@ describe("Feeder RSS Import", () => {
     cy.get("input[placeholder='00:05.00']").should("exist");
     cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains(".btn", "Save").click();
+
+    // go to podcast settings and delete
+    cy.contains("a", "Settings").click({ force: true });
+    cy.get("#podcast_title");
+    cy.contains(".btn", "Save").next(".dropdown-toggle").click();
+    cy.contains(".dropdown-item", "Delete").click();
+    cy.contains("Really Delete?");
+    cy.contains(".btn", "Delete").click();
+    cy.contains("Podcast deleted");
   });
 });
