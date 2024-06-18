@@ -4,7 +4,7 @@ describe("Feeder RSS Import", () => {
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
-  it("imports an RSS feed", () => {
+  it("imports an RSS feed and imports timings", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
 
@@ -36,15 +36,9 @@ describe("Feeder RSS Import", () => {
     // wait for episode media to process
     cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains("00:00:10");
-  });
 
-  it("imports timings", () => {
+    // test timings import
     const timingsFile = "cypress/samples/timings.csv";
-
-    cy.visit("/podcasts");
-    cy.contains("My Podcasts");
-
-    cy.contains("h2", "Test RSS Import").siblings("a").click();
     cy.contains("a", "Settings").click();
 
     // start importing timings
