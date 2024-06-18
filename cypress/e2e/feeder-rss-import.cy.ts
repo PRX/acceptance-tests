@@ -4,6 +4,17 @@ describe("Feeder RSS Import", () => {
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
+  after(() => {
+    // go to podcast settings and delete
+    cy.contains("a", "Settings").click({ force: true });
+    cy.get("#podcast_title");
+    cy.contains(".btn", "Save").next(".dropdown-toggle").click();
+    cy.contains(".dropdown-item", "Delete").click();
+    cy.contains("Really Delete?");
+    cy.contains(".btn", "Delete").click();
+    cy.contains("Podcast deleted");
+  });
+
   it("imports an RSS feed", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
@@ -36,14 +47,34 @@ describe("Feeder RSS Import", () => {
     // wait for episode media to process
     cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains("00:00:10");
+  });
 
-    // go to podcast settings and delete
-    cy.contains("a", "Settings").click({ force: true });
-    cy.get("#podcast_title");
-    cy.contains(".btn", "Save").next(".dropdown-toggle").click();
-    cy.contains(".dropdown-item", "Delete").click();
-    cy.contains("Really Delete?");
-    cy.contains(".btn", "Delete").click();
-    cy.contains("Podcast deleted");
+  it("imports timings", () => {
+    const timingsFile = "cypress/samples/timings.csv";
+
+    cy.visit("/podcasts");
+    cy.contains("My Podcasts");
+
+    cy.contains("h2", "Test RSS Import").siblings("a").click();
+    cy.contains("a", "Settings").click();
+
+    // start importing timings
+    cy.contains("a", "Import").click();
+    cy.get("#podcast_import_type").select("Midroll Timings", { force: true });
+    cy.get("input[type=file]").selectFile(timingsFile, { force: true });
+    cy.contains(".btn", "Start Import").click();
+
+    // wait for the import to find and create timings
+    cy.contains(".badge", "Created", { timeout: 60000 });
+    cy.contains(".badge", "Complete", { timeout: 60000 });
+    cy.contains("a", "S2 EP2 Glassware").click();
+    cy.contains("a", "Media Files").click();
+
+    // wait for episode media to process
+    cy.contains(".card-title", "Mark Ad Breaks", { timeout: 60000 });
+    cy.contains("span", "Midroll 1");
+    cy.get("input[placeholder='00:05.00']").should("exist");
+    cy.contains(".badge", "Complete", { timeout: 60000 });
+    cy.contains(".btn", "Save").click();
   });
 });
