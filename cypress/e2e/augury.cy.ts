@@ -107,10 +107,11 @@ describe("Augury", () => {
     cy.get("#campaign_id + .ss-main").click(); // Open the dropdown
 
     // The dropdown is disconnected/supra of the #campaign_id element
-    var res = cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
-    res.type("C");
+    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true }).type("C");
     cy.contains("Campaign Acceptance Test");
-    res.type("{downArrow}{enter}");
+    cy.get(".ss-open-below .ss-search input[type=search]")
+      .click({ multiple: true })
+      .type("{downArrow}{enter}");
 
     cy.get("#campaign_id").closest(".card").find(".btn").click();
 
