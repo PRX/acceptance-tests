@@ -10,7 +10,7 @@ It enables you to write all types of tests:
 - Integration tests
 - Unit tests
 
-We're using for E2E tests to cover core functionality of apps at PRX.
+We're using E2E tests to cover core functionality of apps at PRX.
 
 ## Requirements
 
@@ -58,8 +58,9 @@ This command opens the Cypress Test Runner, a graphical user interface that allo
 - Watch tests run in real time in the browser
 - Debug tests using browser developer tools
 
-The Test Runner is particularly useful during test development and debugging.
-You can set a `debugger` statement or inspect the DOM!
+The Test Runner is particularly useful during test development and debugging --
+You can set a `debugger` statement or inspect the DOM using familiar chrome
+debugger tools.
 
 ## Writing Tests
 
