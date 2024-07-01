@@ -1,5 +1,4 @@
-/// <reference types="cypress" />
-/// <reference types="@types/jquery" />
+/* global JQuery */
 
 describe("Augury", () => {
   beforeEach(() => {
@@ -110,11 +109,12 @@ describe("Augury", () => {
     cy.get("#campaign_id + .ss-main").click(); // Open the dropdown
 
     // The dropdown is disconnected/supra of the #campaign_id element
-    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true }).type("C");
+    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
+    cy.get(".ss-open-below .ss-search input[type=search]").type("C");
+
     cy.contains("Campaign Acceptance Test");
-    cy.get(".ss-open-below .ss-search input[type=search]")
-      .click({ multiple: true })
-      .type("{downArrow}{enter}");
+    cy.get(".ss-open-below .ss-search input[type=search]").type("{downArrow}{enter}");
+    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
 
     cy.get("#campaign_id").closest(".card").find(".btn").click();
 
