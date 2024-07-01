@@ -1,3 +1,6 @@
+/// <reference types="cypress" />
+/// <reference types="@types/jquery" />
+
 describe("Augury", () => {
   beforeEach(() => {
     cy.login(Cypress.env("TEST_PRX_USER"), Cypress.env("TEST_PRX_PASS"));
