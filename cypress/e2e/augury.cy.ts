@@ -147,3 +147,7 @@ Cypress.Commands.add('selectSlimSelect', (selector, value) => {
   cy.get(`${selector} + .ss-main`).click()  // Open the dropdown
   cy.get('.ss-option').contains(value).click()  // Select the option
 })
+
+Cypress.Commands.add("getAvailabilityResults", () => {
+  cy.get('form.button_to button[type="submit"]')
+});
