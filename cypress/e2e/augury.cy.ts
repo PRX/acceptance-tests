@@ -115,8 +115,6 @@ describe("Augury", () => {
 
     cy.contains("Campaign Acceptance Test");
     cy.get(".ss-open-below .ss-search input[type=search]").type("{downArrow}{enter}");
-    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
-
     cy.get("#campaign_id").closest(".card").find(".btn").click();
 
     cy.contains("Report Builder");
