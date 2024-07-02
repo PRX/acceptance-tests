@@ -1,3 +1,5 @@
+/* global JQuery */
+
 describe("Augury", () => {
   beforeEach(() => {
     cy.login(Cypress.env("TEST_PRX_USER"), Cypress.env("TEST_PRX_PASS"));
@@ -81,4 +83,71 @@ describe("Augury", () => {
     // cy.contains("button.btn-danger", "Delete Creative").click();
     // cy.contains("Creative deleted");
   });
+
+  it("checks inventory availability", () => {
+    cy.visit("/availability");
+
+    // Functions to be implemented
+    cy.getStartDateInput().type("2024-07-01");
+    cy.getEndDateInput().type("2024-07-31");
+    cy.selectSlimSelect("#inventory_id", "Acceptance Test Series");
+    cy.contains("House Preroll");
+    cy.selectSlimSelect("#zone", "House Preroll");
+
+    cy.getAvailabilityResults().should("be.visible");
+    cy.getAvailabilityResults().contains("Calculate");
+    cy.getAvailabilityResults().click();
+
+    // page should container "Forecasted Inventory"
+    cy.contains("Forecasted Inventory");
+  });
+
+  it("generates a campaign report", () => {
+    cy.visit("/reports");
+    cy.contains("Navigate to different types of reports across Dovetail");
+
+    cy.get("#campaign_id + .ss-main").click(); // Open the dropdown
+    cy.contains("Search");
+
+    // The dropdown is disconnected/supra of the #campaign_id element
+    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
+    cy.get(".ss-open-below .ss-search input[type=search]").type("C");
+
+    cy.contains("Campaign Acceptance Test");
+    cy.get(".ss-open-below .ss-search input[type=search]").type("{downArrow}{enter}");
+    cy.get("#campaign_id").closest(".card").find(".btn").click();
+
+    cy.contains("Report Builder");
+  });
+});
+
+declare namespace Cypress {
+  interface Chainable<Subject = any> {
+    getStartDateInput(): Chainable<JQuery<HTMLElement>>;
+    getEndDateInput(): Chainable<JQuery<HTMLElement>>;
+    getInventoryTypeSelect(): Chainable<JQuery<HTMLElement>>;
+    getAvailabilityResults(): Chainable<JQuery<HTMLElement>>;
+    selectSlimSelect(selector: string, value: string): Chainable<JQuery<HTMLElement>>;
+  }
+}
+
+// Custom commands that can be chained
+Cypress.Commands.add("getStartDateInput", () => {
+  return cy.get("input#start_date");
+});
+
+Cypress.Commands.add("getEndDateInput", () => {
+  return cy.get("input#end_date");
+});
+
+Cypress.Commands.add("getInventoryTypeSelect", () => {});
+
+Cypress.Commands.add("selectSlimSelect", (selector, value) => {
+  cy.get(`${selector} + .ss-main`).click(); // Open the dropdown
+  cy.contains(value); // Confirm the option is present
+  cy.get(".ss-option").contains(value).click({ force: true }); // Select the option
+});
+
+Cypress.Commands.add("getAvailabilityResults", () => {
+  cy.get('form.button_to button[type="submit"]');
 });
