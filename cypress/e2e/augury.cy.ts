@@ -91,6 +91,7 @@ describe("Augury", () => {
     cy.getStartDateInput().type("2024-07-01");
     cy.getEndDateInput().type("2024-07-31");
     cy.selectSlimSelect("#inventory_id", "Acceptance Test Series");
+    cy.contains("House Preroll");
     cy.selectSlimSelect("#zone", "House Preroll");
 
     cy.getAvailabilityResults().should("be.visible");
