@@ -102,7 +102,6 @@ describe("Augury", () => {
   });
 
   it("generates a campaign report", () => {
-    // Assuming we have a campaign with ID 1
     cy.visit("/reports");
     cy.contains("Navigate to different types of reports across Dovetail");
 
