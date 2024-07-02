@@ -145,7 +145,7 @@ Cypress.Commands.add("getInventoryTypeSelect", () => {});
 Cypress.Commands.add("selectSlimSelect", (selector, value) => {
   cy.get(`${selector} + .ss-main`).click(); // Open the dropdown
   cy.contains(value); // Confirm the option is present
-  cy.get(".ss-option").contains(value).click(); // Select the option
+  cy.get(".ss-option").contains(value).click({ force: true }); // Select the option
 });
 
 Cypress.Commands.add("getAvailabilityResults", () => {
