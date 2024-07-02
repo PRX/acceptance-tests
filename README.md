@@ -15,7 +15,7 @@ We're using E2E tests to cover core functionality of apps at PRX.
 ## Requirements
 
 - [Node.js](https://nodejs.org/) (preferably managed with [asdf](https://github.com/asdf-vm/asdf))
-- [Yarn](https://yarnpkg.com/)
+- [Yarn](https://yarnpkg.com/) (You can install Yarn via Homebrew `brew install yarn`)
 
 ## Installation
 
