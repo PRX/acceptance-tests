@@ -31,9 +31,9 @@ describe("Feeder Episode Planner", () => {
     cy.get(".prx-badge-incomplete").should("have.length", 10);
     cy.contains("a", "Plan Episodes").click();
     cy.get("td[class*='bg-warning']").should("have.length", 10);
-    cy.get("#selected_days").select("Sunday", { force: true });
+    cy.get("#selected_days").select(["Sunday", "Monday"], { force: true });
     cy.get("#selected_weeks").select("First Week", { force: true });
-    cy.get("td[class*='bg-danger']").should("have.length", 5);
+    cy.get("td[class*='bg-danger']").should("have.length", 10);
 
     // go back to podcast settings and delete
     cy.contains("a", "Settings").click({ force: true });
