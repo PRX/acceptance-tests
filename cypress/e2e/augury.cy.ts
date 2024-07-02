@@ -107,6 +107,7 @@ describe("Augury", () => {
     cy.contains("Navigate to different types of reports across Dovetail");
 
     cy.get("#campaign_id + .ss-main").click(); // Open the dropdown
+    cy.contains("Search");
 
     // The dropdown is disconnected/supra of the #campaign_id element
     cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
