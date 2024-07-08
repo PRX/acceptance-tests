@@ -45,6 +45,7 @@ describe("Feeder RSS Import", () => {
     cy.contains("a", "Import").click();
     cy.get("#podcast_import_type").select("Midroll Timings", { force: true });
     cy.get("input[type=file]").selectFile(timingsFile, { force: true });
+    cy.get("div[data-import-timings-target=fileName]").contains("timings.csv");
     cy.contains(".btn", "Start Import").click();
 
     // wait for the import to find and create timings
