@@ -50,7 +50,8 @@ describe("Feeder RSS Import", () => {
 
     // wait for the import to find and create timings
     cy.contains(".badge", "Created", { timeout: 60000 });
-    cy.contains(".badge", "Complete", { timeout: 60000 });
+    cy.get(".badge").contains("Complete", { timeout: 60000 });
+    cy.contains(".badge", "Error");
     cy.contains("a", "S2 EP2 Glassware").click();
     cy.contains("a", "Media Files").click();
 
