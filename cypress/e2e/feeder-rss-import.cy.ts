@@ -4,7 +4,7 @@ describe("Feeder RSS Import", () => {
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
-  it("imports an RSS feed", () => {
+  it("imports an RSS feed and imports timings", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
 
@@ -36,6 +36,31 @@ describe("Feeder RSS Import", () => {
     // wait for episode media to process
     cy.contains(".badge", "Complete", { timeout: 60000 });
     cy.contains("00:00:10");
+
+    // test timings import
+    const timingsFile = "cypress/samples/timings.csv";
+    cy.contains("a", "Settings").click();
+
+    // start importing timings
+    cy.contains("a", "Import").click();
+    cy.get("#podcast_import_type").select("Midroll Timings", { force: true });
+    cy.get("input[type=file]").selectFile(timingsFile, { force: true });
+    cy.get("div[data-import-timings-target=fileName]").contains("timings.csv");
+    cy.contains(".btn", "Start Import").click();
+
+    // wait for the import to find and create timings
+    cy.contains(".badge", "Created", { timeout: 60000 });
+    cy.get(".badge").contains("Complete", { timeout: 60000 });
+    cy.contains(".badge", "Error");
+    cy.contains("a", "S2 EP2 Glassware").click();
+    cy.contains("a", "Media Files").click();
+
+    // wait for episode media to process
+    cy.contains(".card-title", "Mark Ad Breaks", { timeout: 60000 });
+    cy.contains("span", "Midroll 1");
+    cy.get("input[placeholder='00:05.00']").should("exist");
+    cy.get("#episode-media-status").contains(".badge", "Complete", { timeout: 90000 });
+    cy.contains(".btn", "Save").click();
 
     // go to podcast settings and delete
     cy.contains("a", "Settings").click({ force: true });
