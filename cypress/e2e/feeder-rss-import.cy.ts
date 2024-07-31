@@ -57,7 +57,7 @@ describe("Feeder RSS Import", () => {
 
     // wait for episode media to process
     cy.contains(".card-title", "Mark Ad Breaks", { timeout: 60000 });
-    cy.contains("span", "Midroll 1");
+    cy.contains("span", "Break 1");
     cy.get("input[placeholder='00:05.00']").should("exist");
     cy.get("#episode-media-status").contains(".badge", "Complete", { timeout: 90000 });
     cy.contains(".btn", "Save").click();
