@@ -35,6 +35,7 @@ describe("Feeder Custom Feed", () => {
     cy.contains(".btn", "Add Token").click();
     cy.get("[id^=feed_feed_tokens]").first().type("newtoken");
     cy.contains(".btn", "Save").click();
+    cy.contains("Feed updated");
 
     // delete the custom feed
     cy.contains(".btn", "Save").next(".dropdown-toggle").click();
