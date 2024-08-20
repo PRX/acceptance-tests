@@ -7,8 +7,6 @@ describe("Feeder Custom Feed", () => {
   it("creates a new custom feed", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
-    // const audioFile = "cypress/samples/two-tone.mp3";
-    const imageFile = "cypress/samples/1400.jpg";
 
     cy.visit("/podcasts");
     cy.contains("My Podcasts");
