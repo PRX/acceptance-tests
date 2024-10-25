@@ -9,7 +9,7 @@ Cypress.Commands.add("login", (username, password) => {
     cy.get("#login").type(username);
     cy.get("#password").type(password);
     cy.get(".btn.submit").click();
-    cy.contains("Welcome");
+    cy.contains("My PRX");
   });
 });
 
