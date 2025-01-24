@@ -37,6 +37,7 @@ describe("Augury", () => {
     cy.get("input:focus").type("{downArrow}{downArrow}{downArrow}{enter}");
     cy.contains(".btn", "Create Campaign").click();
     cy.get("h2").contains(`Campaign ${canary}`);
+    cy.get("#flights-tab").click();
 
     // add a flight
     cy.contains(".btn", "Add Flight").click();
