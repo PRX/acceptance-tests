@@ -15,6 +15,8 @@ describe("Augury", () => {
     cy.contains("Acceptance Test Series").click();
     cy.get("#inventory_notes").clear();
     cy.get("#inventory_notes").type(`Inventory Notes: ${canary}`);
+    cy.get("#inventory_onboarding_state_attributes_first_week_downloads").type("100");
+    cy.get("#inventory_onboarding_state_attributes_week_minimum_downloads").type("10");
     cy.contains(".btn", "Update Series").click();
     cy.contains("Series successfully updated");
   });
