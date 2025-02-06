@@ -58,7 +58,7 @@ describe("Augury", () => {
     // delete campaing
     cy.get("#campaign-tab").click();
     cy.contains("Advertiser");
-    cy.get("#campaign-context").click();
+    cy.contains(".btn", "Update Campaign").next(".dropdown-toggle").click();
     cy.get("a[data-bs-target='#delete-campaign-modal']").click();
     cy.get("button.btn-danger").contains("Delete Campaign").click();
   });
