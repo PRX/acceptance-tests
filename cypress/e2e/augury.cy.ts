@@ -51,7 +51,7 @@ describe("Augury", () => {
     cy.get("#flight_start_at").type(now);
     cy.get("#flight_start_at").blur();
     cy.get("label[for=flight_inventory_id").prev().click();
-    cy.get("div:focus").type("{downArrow}{downArrow}{enter}");
+    cy.get("div:focus").type("{downArrow}{enter}");
     cy.contains(".btn", "Create Flight").click();
     cy.get("h2").contains(`Flight ${canary}`);
 
