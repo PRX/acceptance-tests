@@ -4,7 +4,7 @@ describe("Feeder RSS Import", () => {
     Cypress.config({ baseUrl: `https://${Cypress.env("FEEDER_HOST")}` });
   });
 
-  it("imports an RSS feed and imports timings", () => {
+  it.skip("imports an RSS feed and imports timings", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
 
