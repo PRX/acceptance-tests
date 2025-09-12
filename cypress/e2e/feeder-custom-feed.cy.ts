@@ -25,7 +25,7 @@ describe("Feeder Custom Feed", () => {
     // go to feeds and add a new custom feed
     cy.contains("a", "Feeds").click();
     cy.contains(".btn", "Add a Feed").click();
-    cy.get("#feed_title").type(canary);
+    cy.get("#feed_label").type(canary);
     cy.get("#feed_slug").type("customslug");
     cy.contains(".btn", "Create").click();
     cy.contains("Feed created");
