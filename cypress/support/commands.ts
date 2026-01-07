@@ -13,6 +13,14 @@ Cypress.Commands.add("login", (username, password) => {
   });
 });
 
+// haaaaaacky - slim-select 3 multiselects don't play well with ".select()" so
+// manually click them, and i guess wait for some JS things to happen?
+Cypress.Commands.add("hackySlimSelect", (domId, text) => {
+  cy.get(domId).next().click();
+  cy.contains(".ss-option", text).click();
+  cy.contains(".ss-option", text).should("not.be.visible");
+});
+
 // Keeps requesting a URL until it contains and XML <item>
 function waitForRssItems(url, title, checkImage = false, retries = 0) {
   const now = new Date().getTime();

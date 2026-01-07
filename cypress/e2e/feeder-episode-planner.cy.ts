@@ -15,13 +15,15 @@ describe("Feeder Episode Planner", () => {
     cy.get('a.btn-success[href="/podcasts/new"]').click();
     cy.contains("New Podcast");
     cy.get("#podcast_title").type(canary);
-    cy.get("#podcast_default_feed_attributes_itunes_category").select("Arts", { force: true });
+    cy.hackySlimSelect("#podcast_default_feed_attributes_itunes_category", "Arts");
     cy.contains(".btn", "Create").click();
 
     // plan episodes
     cy.contains("a", "Plan Episodes").click();
-    cy.get("#selected_days").select(["Sunday", "Monday"], { force: true });
-    cy.get("#selected_weeks").select("First Week", { force: true });
+    cy.hackySlimSelect("#selected_days", "Sunday");
+    cy.wait(100);
+    cy.hackySlimSelect("#selected_days", "Monday");
+    cy.hackySlimSelect("#selected_weeks", "First Week");
     cy.get("#ad_breaks").type("1");
     cy.contains("Create 10 Drafts").click();
     cy.contains("Episode drafts generated");
@@ -31,8 +33,10 @@ describe("Feeder Episode Planner", () => {
     cy.get(".prx-badge-incomplete").should("have.length", 10);
     cy.contains("a", "Plan Episodes").click();
     cy.get("td[class*='bg-warning']").should("have.length", 10);
-    cy.get("#selected_days").select(["Sunday", "Monday"], { force: true });
-    cy.get("#selected_weeks").select("First Week", { force: true });
+    cy.hackySlimSelect("#selected_days", "Sunday");
+    cy.wait(100);
+    cy.hackySlimSelect("#selected_days", "Monday");
+    cy.hackySlimSelect("#selected_weeks", "First Week");
     cy.get("td[class*='bg-danger']").should("have.length", 10);
 
     // go back to podcast settings and delete

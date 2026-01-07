@@ -15,7 +15,7 @@ describe("Feeder RSS Import", () => {
     cy.get('a.btn-success[href="/podcasts/new"]').click();
     cy.contains("New Podcast");
     cy.get("#podcast_title").type(canary);
-    cy.get("#podcast_default_feed_attributes_itunes_category").select("Arts", { force: true });
+    cy.hackySlimSelect("#podcast_default_feed_attributes_itunes_category", "Arts");
     cy.contains(".btn", "Create").click();
     cy.contains("Podcast created");
 
