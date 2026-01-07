@@ -48,7 +48,7 @@ describe("Feeder", () => {
     cy.get("#episode-form-media .spinner-border", { timeout: 60000 }).should("not.exist");
     cy.get(".prx-tabs-nav a").first().click();
     cy.get("#episode-form-image .spinner-border", { timeout: 5000 }).should("not.exist");
-    cy.get("#episode_publishing_status").select("Published", { force: true });
+    cy.hackySlimSelect("#episode_publishing_status", "Published");
     cy.contains(".btn", "Save").click();
     cy.contains("Episode updated");
 
