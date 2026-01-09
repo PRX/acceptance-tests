@@ -21,7 +21,6 @@ describe("Feeder Episode Planner", () => {
     // plan episodes
     cy.contains("a", "Plan Episodes").click();
     cy.hackySlimSelect("#selected_days", "Sunday");
-    cy.wait(100);
     cy.hackySlimSelect("#selected_days", "Monday");
     cy.hackySlimSelect("#selected_weeks", "First Week");
     cy.get("#ad_breaks").type("1");
@@ -34,7 +33,6 @@ describe("Feeder Episode Planner", () => {
     cy.contains("a", "Plan Episodes").click();
     cy.get("td[class*='bg-warning']").should("have.length", 10);
     cy.hackySlimSelect("#selected_days", "Sunday");
-    cy.wait(100);
     cy.hackySlimSelect("#selected_days", "Monday");
     cy.hackySlimSelect("#selected_weeks", "First Week");
     cy.get("td[class*='bg-danger']").should("have.length", 10);

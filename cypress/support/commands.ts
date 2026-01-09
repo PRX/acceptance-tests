@@ -19,6 +19,7 @@ Cypress.Commands.add("hackySlimSelect", (domId, text) => {
   cy.get(domId).next().click();
   cy.contains(".ss-option", text).click();
   cy.contains(".ss-option", text).should("not.be.visible");
+  cy.wait(100);
 });
 
 // Keeps requesting a URL until it contains and XML <item>
