@@ -17,8 +17,19 @@ Cypress.Commands.add("login", (username, password) => {
 // manually click them, and i guess wait for some JS things to happen?
 Cypress.Commands.add("hackySlimSelect", (domId, text) => {
   cy.get(domId).next().click();
-  cy.contains(".ss-option", text).click();
-  cy.contains(".ss-option", text).should("not.be.visible");
+  cy.contains(".ss-option", text).first().click();
+  cy.contains(".ss-option", text).first().should("not.be.visible");
+  cy.wait(100);
+});
+Cypress.Commands.add("hackySlimSearch", (domId, text, focus = true) => {
+  if (focus) {
+    cy.get(domId).next().focus();
+  } else {
+    cy.get(domId).next().click();
+  }
+  cy.get(".ss-search input").filter(':visible').type(text);
+  cy.get(".ss-option").first().click();
+  cy.get(".ss-search").should("not.be.visible");
   cy.wait(100);
 });
 

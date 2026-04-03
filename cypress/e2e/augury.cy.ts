@@ -37,10 +37,7 @@ describe("Augury", () => {
     cy.contains("New Campaign");
     cy.get("#campaign_name").type(`Campaign ${canary}`);
     cy.get("label[for=campaign_advertiser_id").prev().click();
-    cy.intercept("/options/advertisers?q=a").as("advertiserList");
-    cy.get("input:focus").type("a");
-    cy.wait("@advertiserList");
-    cy.get("input:focus").type("{downArrow}{downArrow}{downArrow}{enter}");
+    cy.hackySlimSearch("#campaign_advertiser_id", "a");
     cy.contains(".btn", "Create Campaign").click();
     cy.get("h2").contains(`Campaign ${canary}`);
     cy.get("#flights-tab").click();
@@ -50,8 +47,7 @@ describe("Augury", () => {
     cy.get("#flight_name").type(`Flight ${canary}`);
     cy.get("#flight_start_at").type(now);
     cy.get("#flight_start_at").blur();
-    cy.get("label[for=flight_inventory_id").prev().click();
-    cy.get("div:focus").type("{downArrow}{enter}");
+    cy.hackySlimSelect("#flight_inventory_id", "Acceptance Test");
     cy.contains(".btn", "Create Flight").click();
     cy.get("h2").contains(`Flight ${canary}`);
 
@@ -113,15 +109,7 @@ describe("Augury", () => {
     cy.visit("/reports");
     cy.contains("Navigate to different types of reports across Dovetail");
 
-    cy.get("#campaign_id + .ss-main").click(); // Open the dropdown
-    cy.contains("Search");
-
-    // The dropdown is disconnected/supra of the #campaign_id element
-    cy.get(".ss-open-below .ss-search input[type=search]").click({ multiple: true });
-    cy.get(".ss-open-below .ss-search input[type=search]").type("C");
-
-    cy.contains("Campaign Acceptance Test");
-    cy.get(".ss-open-below .ss-search input[type=search]").type("{downArrow}{enter}");
+    cy.hackySlimSearch("#campaign_id", "C", false);
     cy.get("#campaign_id").closest(".card").find(".btn").click();
 
     cy.contains("Report Builder");
