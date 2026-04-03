@@ -7,6 +7,11 @@ declare namespace Cypress {
   }
 
   interface Chainable<Subject = any> {
+    hackySlimSelect(domId: string, text: string): Chainable<any>;
+    hackySlimSearch(domId: string, text: string, focus?: boolean): Chainable<any>;
+  }
+
+  interface Chainable<Subject = any> {
     waitForRssItems(
       url: string,
       title: string,

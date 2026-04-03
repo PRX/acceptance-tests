@@ -19,6 +19,7 @@ Cypress.Commands.add("hackySlimSelect", (domId, text) => {
   cy.get(domId).next().click();
   cy.contains(".ss-option", text).first().click();
   cy.contains(".ss-option", text).first().should("not.be.visible");
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(100);
 });
 Cypress.Commands.add("hackySlimSearch", (domId, text, focus = true) => {
@@ -27,9 +28,10 @@ Cypress.Commands.add("hackySlimSearch", (domId, text, focus = true) => {
   } else {
     cy.get(domId).next().click();
   }
-  cy.get(".ss-search input").filter(':visible').type(text);
+  cy.get(".ss-search input").filter(":visible").type(text);
   cy.get(".ss-option").first().click();
   cy.get(".ss-search").should("not.be.visible");
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(100);
 });
 
