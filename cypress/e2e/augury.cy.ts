@@ -29,14 +29,13 @@ describe("Augury", () => {
     const now = new Date().toISOString();
     const canary = `Acceptance Test: ${now}`;
 
-    cy.visit("/flights");
-    cy.contains("Flights");
+    cy.visit("/campaigns");
+    cy.contains("Campaigns");
 
     // create a new campaign
     cy.get('a.btn-success[href="/campaigns/new"]').click();
     cy.contains("New Campaign");
     cy.get("#campaign_name").type(`Campaign ${canary}`);
-    cy.get("label[for=campaign_advertiser_id").prev().click();
     cy.hackySlimSearch("#campaign_advertiser_id", "a");
     cy.contains(".btn", "Create Campaign").click();
     cy.get("h2").contains(`Campaign ${canary}`);
@@ -109,7 +108,7 @@ describe("Augury", () => {
     cy.visit("/reports");
     cy.contains("Navigate to different types of reports across Dovetail");
 
-    cy.hackySlimSearch("#campaign_id", "C", false);
+    cy.hackySlimSearch("#campaign_id", "C");
     cy.get("#campaign_id").closest(".card").find(".btn").click();
 
     cy.contains("Report Builder");
