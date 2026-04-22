@@ -104,6 +104,32 @@ describe("Augury", () => {
     cy.contains("Forecasted Inventory");
   });
 
+  it("keeps the Advertiser filter visible while typing async search", () => {
+    cy.visit("/flights");
+    cy.contains("All Flights");
+
+    // add the Advertiser filter from the "+" menu
+    cy.get("#addFilterButton").click();
+    cy.get(".dropdown-menu button[data-name='advertiser_id']").click();
+
+    const wrapper = "[data-filter-target='wrapper'][data-name='advertiser_id']";
+    cy.get(wrapper).should("be.visible");
+
+    // open the slim-select dropdown and type to trigger async search
+    cy.intercept("GET", "/options/advertisers*").as("advertiserOptions");
+    cy.get("#advertiser_id").next(".ss-main").click();
+    cy.get(".ss-search input").filter(":visible").type("a");
+    cy.wait("@advertiserOptions");
+
+    // the regression: the wrapper must still be visible after the rebuild
+    cy.get(wrapper).should("be.visible");
+    cy.get(".ss-content:visible .ss-option:not(.ss-hide)").should("exist");
+
+    // picking a result should actually update the URL (afterChange path)
+    cy.get(".ss-content:visible .ss-option:not(.ss-hide)").first().click();
+    cy.url().should("match", /advertiser_id=[^&]+/);
+  });
+
   it("generates a campaign report", () => {
     cy.visit("/reports");
     cy.contains("Navigate to different types of reports across Dovetail");
